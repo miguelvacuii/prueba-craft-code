@@ -15,6 +15,8 @@ using LinqToExcel;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
 using ExcelImport.UseCases;
+using Microsoft.AspNetCore.Http;
+using ExcelImport.Controllers.Exception;
 
 namespace ExcelImport.Controllers
 {
@@ -33,28 +35,27 @@ namespace ExcelImport.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadExcel(User users, HttpPostedFileBase fileUpload)
+        public IActionResult UploadExcel(User users, HttpPostedFileBase fileUpload)
         {
-
-            List<string> errorMessage = new List<string>();
+            const string CONTENT_TYPE_EXCEL = "application/vnd.ms-excel";
+            const string CONTENT_TYPE_XML = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
             if (fileUpload == null) {
-                errorMessage.Add("<ul>");
-                if (fileUpload == null) errorMessage.Add("<li>Please choose Excel file</li>");
-                errorMessage.Add("</ul>");
-                errorMessage.ToArray();
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+                throw InvalidFileException.FromNull();
             }
 
-            if (fileUpload.ContentType != "application/vnd.ms-excel" || fileUpload.ContentType != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-                errorMessage.Add("<ul>");
-                errorMessage.Add("<li>Only Excel file format is allowed</li>");
-                errorMessage.Add("</ul>");
-                errorMessage.ToArray();
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+            if (fileUpload.ContentType != CONTENT_TYPE_EXCEL || fileUpload.ContentType != CONTENT_TYPE_XML) {
+                throw InvalidFileException.FromContentType();
             }
 
-            return UploadUsersUseCase.Invoke(users, fileUpload);
+            try {
+                UploadUsersUseCase.Invoke(users, fileUpload);
+                return StatusCode(200);
+            } catch (System.Exception exception) {
+                return StatusCode(422, exception.Message);
+            }
+
+            
         }
     }
 }

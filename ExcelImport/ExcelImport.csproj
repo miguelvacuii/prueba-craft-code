@@ -6,8 +6,10 @@
 
   <ItemGroup>
     <None Remove="UseCases\" />
+    <None Remove="Controllers\Exception\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UseCases\" />
+    <Folder Include="Controllers\Exception\" />
   </ItemGroup>
 </Project>
