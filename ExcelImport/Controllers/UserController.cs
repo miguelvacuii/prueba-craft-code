@@ -20,16 +20,11 @@ namespace ExcelImport.Controllers
     public class UserController : Controller
     {
         
-        // GET: User
         public ActionResult Index()
         {
             return View();
         }
-        /// <summary>
-        /// This function is used to download excel format.
-        /// </summary>
-        /// <param name="Path"></param>
-        /// <returns>file</returns>
+
         public FileResult DownloadExcel()
         {
             string path = "/Doc/Users.xlsx";
@@ -43,7 +38,6 @@ namespace ExcelImport.Controllers
             List<string> data = new List<string>();
             if (FileUpload != null)
             {
-                // tdata.ExecuteCommand("truncate table OtherCompanyAssets");
                 if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     string filename = FileUpload.FileName;
@@ -102,7 +96,7 @@ namespace ExcelImport.Controllers
                             }
                         }
                     }
-                    //deleting excel file from folder
+
                     if ((System.IO.File.Exists(pathToExcelFile)))
                     {
                         System.IO.File.Delete(pathToExcelFile);
@@ -111,7 +105,6 @@ namespace ExcelImport.Controllers
                 }
                 else
                 {
-                    //alert message for invalid file format
                     data.Add("<ul>");
                     data.Add("<li>Only Excel file format is allowed</li>");
                     data.Add("</ul>");
