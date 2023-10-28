@@ -53,14 +53,21 @@ namespace ExcelImport.Controllers
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
 
+            UploadExcelUseCase(users, FileUpload);
+
+            return Json("success", JsonRequestBehavior.AllowGet);
+            
+        }
+
+        public void UploadExcelUseCase(User users, HttpPostedFileBase FileUpload) {
+
             string filename = FileUpload.FileName;
             string targetpath = Server.MapPath("~/Doc/");
             FileUpload.SaveAs(targetpath + filename);
             string pathToExcelFile = targetpath + filename;
             var connectionString = "";
 
-            if (filename.EndsWith(".xls"))
-            {
+            if (filename.EndsWith(".xls")) {
                 connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
             }
             else if (filename.EndsWith(".xlsx"))
@@ -115,8 +122,6 @@ namespace ExcelImport.Controllers
             {
                 System.IO.File.Delete(pathToExcelFile);
             }
-            return Json("success", JsonRequestBehavior.AllowGet);
-            
         }
     }
 }
