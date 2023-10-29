@@ -35,7 +35,7 @@ namespace ExcelImport.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadExcel(User users, HttpPostedFileBase fileUpload)
+        public IActionResult UploadExcel(HttpPostedFileBase fileUpload)
         {
             const string CONTENT_TYPE_EXCEL = "application/vnd.ms-excel";
             const string CONTENT_TYPE_XML = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -49,7 +49,7 @@ namespace ExcelImport.Controllers
             }
 
             try {
-                UploadUsersUseCase.Invoke(users, fileUpload);
+                UploadUsersUseCase.Invoke(fileUpload);
                 return StatusCode(200);
             } catch (System.Exception exception) {
                 return StatusCode(422, exception.Message);
