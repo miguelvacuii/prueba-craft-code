@@ -2,5 +2,7 @@
 {
     public interface IPersistenceService
     {
+        void Add<T>(T entity);
+        void SaveChanges();
     }
 }

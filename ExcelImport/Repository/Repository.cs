@@ -1,4 +1,5 @@
-﻿using ExcelImport.Repository.Service;
+﻿using ExcelImport.Repository.Exception;
+using ExcelImport.Repository.Service;
 
 namespace ExcelImport.Repository
 {
@@ -7,18 +8,18 @@ namespace ExcelImport.Repository
 
         private readonly IPersistenceService persistenceService;
 
-        private Repository(IPersistenceService persistenceService) {
+        public Repository(IPersistenceService persistenceService) {
             this.persistenceService = persistenceService;
         }
 
         public void Add(T entity)
         {
-            // TO-DO
-        }
-
-        public void SaveChanges()
-        {
-            // TO-DO
+            try {
+                persistenceService.Add<T>(entity);
+                persistenceService.SaveChanges();
+            } catch (DbEntityValidationException ex) {
+                throw RepositoryException.FromEntity(entity.ToString(), ex);
+            }
         }
     }
 }

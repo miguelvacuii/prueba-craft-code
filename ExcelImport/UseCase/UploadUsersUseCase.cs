@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using ExcelImport.Models.User;
-using ExcelImport.Repository;
-using ExcelImport.Repository.Exception;
 using ExcelImport.Repository.User;
-using ExcelImport.Shared;
+using ExcelImport.UseCase.Service;
 
 namespace ExcelImport.UseCases
 {
     public class UploadUsersUseCase
     {
         private readonly IUserRepository repository;
+        private readonly UserFactory userFactory;
 
         private UploadUsersUseCase(IUserRepository repository)
         {
@@ -25,7 +23,11 @@ namespace ExcelImport.UseCases
 
             dynamic userList = GetUsersFromExcel(pathToExcelFile);
 
-            SaveUsers(userList);
+            foreach (var user in userList)
+            {
+                User userUpdated = userFactory.CreateUserFromSource(user);
+                repository.Add(userUpdated);
+            }
 
             DeleteFile(pathToExcelFile);
         }
@@ -43,23 +45,6 @@ namespace ExcelImport.UseCases
             var excelFile = new ExcelQueryFactory(pathToExcelFile);
 
             return (from rows in excelFile.Worksheet<User>(sheetName) select rows) as dynamic;
-        }
-
-        private void SaveUsers(dynamic userList)
-        {
-            foreach (var user in userList) {
-                try {
-                    UserName userName = new UserName(user.Name);
-                    UserAddress userAddress = new UserAddress(user.Address);
-                    UserContactNumber userContactNumber = new UserContactNumber(user.ContactNo);
-
-                    User userUpdated = User.Create(userName, userAddress, userContactNumber);
-                    repository.Add(user);
-                    repository.SaveChanges();
-                } catch (DbEntityValidationException ex) {
-                    throw RepositoryException.FromEntity("User", ex);
-                }
-            }
         }
 
         private void DeleteFile(String pathToExcelFile)

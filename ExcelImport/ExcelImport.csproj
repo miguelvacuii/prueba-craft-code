@@ -14,6 +14,7 @@
     <None Remove="Shared\ValueObject\" />
     <None Remove="Repository\User\" />
     <None Remove="Repository\Service\" />
+    <None Remove="UseCase\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UseCases\" />
@@ -25,5 +26,6 @@
     <Folder Include="Shared\ValueObject\" />
     <Folder Include="Repository\User\" />
     <Folder Include="Repository\Service\" />
+    <Folder Include="UseCase\Service\" />
   </ItemGroup>
 </Project>
