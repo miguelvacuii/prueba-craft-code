@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using ExcelImport.Models.User;
+using ExcelImport.Repository;
+using ExcelImport.Repository.Exception;
+using ExcelImport.Repository.User;
 
 namespace ExcelImport.UseCases
 {
     public class UploadUsersUseCase
     {
-        private test2Entities repository = new test2Entities();
+        private readonly IUserRepository repository;
 
-        private UploadUsersUseCase()
+        private UploadUsersUseCase(IUserRepository repository)
         {
+            this.repository = repository;
         }
 
-        public JsonResult Invoke(User users, HttpPostedFileBase fileUpload)
+        public void Invoke(User users, HttpPostedFileBase fileUpload)
         {
 
             string fileName = fileUpload.FileName;
@@ -24,17 +28,11 @@ namespace ExcelImport.UseCases
 
             CreateConnection(fileName, pathToExcelFile);
 
-            List<User> userList = GetUsersFromExcel(pathToExcelFile);
+            dynamic userList = GetUsersFromExcel(pathToExcelFile);
 
             List<string> errorMessage = SaveUsers(userList);
 
-            if (errorMessage.Any())
-            {
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
-            }
-
             DeleteFile(pathToExcelFile);
-            return Json("success", JsonRequestBehavior.AllowGet);
         }
 
         private void CreateConnection(string fileName, string pathToExcelFile)
@@ -58,55 +56,29 @@ namespace ExcelImport.UseCases
             }
         }
 
-        private List<User> GetUsersFromExcel(string pathToExcelFile)
+        private dynamic GetUsersFromExcel(string pathToExcelFile)
         {
             string sheetName = "Sheet1";
             var excelFile = new ExcelQueryFactory(pathToExcelFile);
 
-            return (from rows in excelFile.Worksheet<User>(sheetName) select rows) as List<User>;
+            return (from rows in excelFile.Worksheet<User>(sheetName) select rows) as dynamic;
         }
 
-        private List<string> SaveUsers(List<User> userList)
+        private void SaveUsers(dynamic userList)
         {
-            List<string> errorMessage = new List<string>();
+            foreach (var user in userList) {
+                try {
+                    UserName userName = new UserName(user.Name);
+                    UserAddress userAddress = new UserAddress(user.Address);
+                    UserContactNumber userContactNumber = new UserContactNumber(user.ContactNo);
 
-            foreach (User user in userList)
-            {
-                try
-                {
-                    if (user.Name != "" && user.Address != "" && user.ContactNo != "")
-                    {
-                        User userUpdated = new User();
-                        userUpdated.Name = user.Name;
-                        userUpdated.Address = user.Address;
-                        userUpdated.ContactNo = user.ContactNo;
-                        repository.Users.Add(userUpdated);
-                        repository.SaveChanges();
-                    }
-                    else
-                    {
-                        errorMessage.Add("<ul>");
-                        if (user.Name == "" || user.Name == null) errorMessage.Add("<li> name is required</li>");
-                        if (user.Address == "" || user.Address == null) errorMessage.Add("<li> Address is required</li>");
-                        if (user.ContactNo == "" || user.ContactNo == null) errorMessage.Add("<li>ContactNo is required</li>");
-                        errorMessage.Add("</ul>");
-                        errorMessage.ToArray();
-
-                    }
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
-                    }
+                    User userUpdated = User.Create(userName, userAddress, userContactNumber);
+                    repository.Add(user);
+                    repository.SaveChanges();
+                } catch (DbEntityValidationException ex) {
+                    throw RepositoryException.FromEntity("User", ex);
                 }
             }
-
-            return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
         private void DeleteFile(String pathToExcelFile)

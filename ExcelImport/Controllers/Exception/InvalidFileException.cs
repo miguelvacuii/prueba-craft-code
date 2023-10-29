@@ -1,22 +1,17 @@
-﻿using System;
-namespace ExcelImport.Controllers.Exception
+﻿namespace ExcelImport.Controllers.Exception
 {
-    public class InvalidFileException : FormatException
+    public class InvalidFileException : System.Exception
     {
         public InvalidFileException(string message) : base(message) { }
 
         public static InvalidFileException FromNull()
         {
-            return new InvalidFileException(
-                string.Format("Please choose Excel file")
-            );
+            return new InvalidFileException("Please choose Excel file");
         }
 
         public static InvalidFileException FromContentType()
         {
-            return new InvalidFileException(
-                string.Format("Only Excel file format is allowed")
-            );
+            return new InvalidFileException("Only Excel file format is allowed");
         }
     }
 }

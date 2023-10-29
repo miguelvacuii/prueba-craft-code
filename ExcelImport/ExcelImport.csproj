@@ -7,9 +7,21 @@
   <ItemGroup>
     <None Remove="UseCases\" />
     <None Remove="Controllers\Exception\" />
+    <None Remove="Models\Entity\" />
+    <None Remove="Repository\" />
+    <None Remove="Repository\Exception\" />
+    <None Remove="Shared\" />
+    <None Remove="Shared\ValueObject\" />
+    <None Remove="Repository\User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UseCases\" />
     <Folder Include="Controllers\Exception\" />
+    <Folder Include="Models\User\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Repository\Exception\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Shared\ValueObject\" />
+    <Folder Include="Repository\User\" />
   </ItemGroup>
 </Project>
