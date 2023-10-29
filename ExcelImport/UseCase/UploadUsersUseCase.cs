@@ -18,7 +18,7 @@ namespace ExcelImport.UseCases
             this.repository = repository;
         }
 
-        public void Invoke(User users, HttpPostedFileBase fileUpload)
+        public void Invoke(HttpPostedFileBase fileUpload)
         {
 
             string fileName = fileUpload.FileName;
@@ -33,27 +33,6 @@ namespace ExcelImport.UseCases
             List<string> errorMessage = SaveUsers(userList);
 
             DeleteFile(pathToExcelFile);
-        }
-
-        private void CreateConnection(string fileName, string pathToExcelFile)
-        {
-            string connectionString = "";
-            if (fileName.EndsWith(".xls"))
-            {
-                connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
-            }
-            else if (fileName.EndsWith(".xlsx"))
-            {
-                connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
-            }
-
-            if (connectionString != "")
-            {
-                var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet, "ExcelTable");
-                DataTable dtable = dataSet.Tables["ExcelTable"];
-            }
         }
 
         private dynamic GetUsersFromExcel(string pathToExcelFile)
