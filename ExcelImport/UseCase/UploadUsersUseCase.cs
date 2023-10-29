@@ -6,6 +6,7 @@ using ExcelImport.Models.User;
 using ExcelImport.Repository;
 using ExcelImport.Repository.Exception;
 using ExcelImport.Repository.User;
+using ExcelImport.Shared;
 
 namespace ExcelImport.UseCases
 {
@@ -20,17 +21,20 @@ namespace ExcelImport.UseCases
 
         public void Invoke(HttpPostedFileBase fileUpload)
         {
-
-            string fileName = fileUpload.FileName;
-            string targetPath = Server.MapPath("~/Doc/");
-            fileUpload.SaveAs(targetPath + fileName);
-            string pathToExcelFile = targetPath + fileName;
+            string pathToExcelFile = SaveFileAndReturnPath(fileUpload);
 
             dynamic userList = GetUsersFromExcel(pathToExcelFile);
 
-            List<string> errorMessage = SaveUsers(userList);
+            SaveUsers(userList);
 
             DeleteFile(pathToExcelFile);
+        }
+
+        private string SaveFileAndReturnPath(HttpPostedFileBase fileUpload) {
+            string fileName = fileUpload.FileName;
+            string targetPath = Server.MapPath("~/Doc/");
+            fileUpload.SaveAs(targetPath + fileName);
+            return targetPath + fileName;
         }
 
         private dynamic GetUsersFromExcel(string pathToExcelFile)

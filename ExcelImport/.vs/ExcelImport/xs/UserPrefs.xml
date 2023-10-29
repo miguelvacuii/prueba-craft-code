@@ -1,17 +1,16 @@
 ﻿<Properties StartupConfiguration="{63E75B29-BD26-4683-9C85-56A62A09B013}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/UserController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="UseCase/UploadUsersUseCase.cs">
     <Files>
-      <File FileName="Controllers/UserController.cs" Line="44" Column="55" />
-      <File FileName="UseCase/UploadUsersUseCase.cs" Line="14" Column="55" />
+      <File FileName="Controllers/UserController.cs" Line="32" Column="64" />
+      <File FileName="UseCase/UploadUsersUseCase.cs" Line="22" Column="58" />
+      <File FileName="Shared/ValueObject/UUID.cs" Line="4" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ExcelImport" expanded="True">
             <Node name="ExcelImport" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="UserController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
                 <Node name="User" expanded="True" />
               </Node>
@@ -19,11 +18,11 @@
                 <Node name="User" expanded="True" />
               </Node>
               <Node name="Shared" expanded="True">
-                <Node name="ValueObject" expanded="True">
-                  <Node name="Exception" expanded="True" />
-                </Node>
+                <Node name="ValueObject" expanded="True" />
               </Node>
-              <Node name="UseCase" expanded="True" />
+              <Node name="UseCase" expanded="True">
+                <Node name="UploadUsersUseCase.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
