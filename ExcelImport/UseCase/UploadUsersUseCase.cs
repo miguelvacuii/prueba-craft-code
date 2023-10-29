@@ -26,8 +26,6 @@ namespace ExcelImport.UseCases
             fileUpload.SaveAs(targetPath + fileName);
             string pathToExcelFile = targetPath + fileName;
 
-            CreateConnection(fileName, pathToExcelFile);
-
             dynamic userList = GetUsersFromExcel(pathToExcelFile);
 
             List<string> errorMessage = SaveUsers(userList);
