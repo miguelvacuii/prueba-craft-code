@@ -1,11 +1,14 @@
-﻿namespace ExcelImport.Repository
+﻿using ExcelImport.Repository.Service;
+
+namespace ExcelImport.Repository
 {
     public class Repository<T> : IRepository<T>
     {
 
-        private readonly Test2Entities persistenceService = new Test2Entities();
+        private readonly IPersistenceService persistenceService;
 
-        public Repository() {
+        private Repository(IPersistenceService persistenceService) {
+            this.persistenceService = persistenceService;
         }
 
         public void Add(T entity)
