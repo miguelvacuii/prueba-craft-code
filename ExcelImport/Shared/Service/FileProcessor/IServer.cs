@@ -1,5 +1,4 @@
-﻿using System;
-namespace ExcelImport.Shared.Service.FileProcessor
+﻿namespace ExcelImport.Shared.Service.FileProcessor
 {
     public interface IServer
     {

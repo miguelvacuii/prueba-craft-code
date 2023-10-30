@@ -35,7 +35,9 @@ namespace ExcelImport.UseCase.Service
         {
             ExcelFile excelFile = excelQueryFactory.ReadFile(path);
 
-            return (from rows in excelFile.Worksheet<User>(SHEET_NAME) select rows) as dynamic;
+            //return (from rows in excelFile.Worksheet<User>(SHEET_NAME) select rows) as dynamic;
+
+            return excelFile;
         }
     }
 }

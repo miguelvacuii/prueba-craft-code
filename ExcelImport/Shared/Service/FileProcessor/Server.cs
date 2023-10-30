@@ -4,7 +4,7 @@
     {
         public Server() { }
 
-        public static string MapPath(string path) {
+        public string MapPath(string path) {
             return path;
         }
     }

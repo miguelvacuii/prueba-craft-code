@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = ExcelImport.Tests
+build_property.ProjectDir = /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/
