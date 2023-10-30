@@ -2,8 +2,8 @@
 {
     public class HttpPostedFileBase
     {
-        public string ContentType { get; internal set; }
-        public string FileName { get; internal set; }
+        public string ContentType { get; set; }
+        public string FileName { get; set; }
 
         internal void SaveAs(string name)
         {

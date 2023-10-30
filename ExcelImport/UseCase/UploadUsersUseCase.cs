@@ -13,7 +13,7 @@ namespace ExcelImport.UseCases
 
         private const string PATH = "~/Doc/";
 
-        private UploadUsersUseCase(
+        public UploadUsersUseCase(
             IUserRepository repository,
             UserFactory userFactory,
             UserFileProcessService userFileProcessService

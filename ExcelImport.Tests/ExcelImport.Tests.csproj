@@ -10,17 +10,27 @@
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.20.69" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Models\User\" />
     <None Remove="Models\User\Stub\" />
+    <None Remove="UseCase\" />
+    <None Remove="Models\Shared\" />
+    <None Remove="Models\Shared\Service\" />
+    <None Remove="UseCase\Service\" />
+    <None Remove="Moq" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\User\" />
     <Folder Include="Models\User\Stub\" />
+    <Folder Include="UseCase\" />
+    <Folder Include="Models\Shared\" />
+    <Folder Include="Models\Shared\Service\" />
+    <Folder Include="UseCase\Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExcelImport\ExcelImport.csproj" />
