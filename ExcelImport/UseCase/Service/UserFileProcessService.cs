@@ -10,15 +10,16 @@ namespace ExcelImport.UseCase.Service
         private readonly IServer server;
 
         private const string SHEET_NAME = "Sheet1";
+        private const string CONTENT_TYPE_EXCEL = "application/vnd.ms-excel";
+        private const string CONTENT_TYPE_XML = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-        private UserFileProcessService(IFileProcessorLibrary fileProcessorLibrary, IServer server) : base (
+
+        public UserFileProcessService(IFileProcessorLibrary fileProcessorLibrary, IServer server) : base (
             fileProcessorLibrary, server) {}
 
-        public override string SaveFileAndReturnPath(HttpPostedFileBase file, string path)
+        public override string SaveFileAndReturnPath(HttpPostedFileBase file)
         {
-            const string CONTENT_TYPE_EXCEL = "application/vnd.ms-excel";
-            const string CONTENT_TYPE_XML = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
+            
             if (file == null)
             {
                 throw FileProcessException.FromNull();
@@ -28,7 +29,8 @@ namespace ExcelImport.UseCase.Service
             {
                 throw FileProcessException.FromContentType("Excel");
             }
-            return base.SaveFileAndReturnPath(file, path);
+
+            return base.SaveFileAndReturnPath(file);
         }
 
         public override dynamic ProcessFileContent(string path)

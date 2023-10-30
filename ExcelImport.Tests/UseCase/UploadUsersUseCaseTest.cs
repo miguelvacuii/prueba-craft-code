@@ -50,7 +50,7 @@ namespace ExcelImport.Tests.UseCase
             uploadUsersUseCase.Invoke(fileUpload);
 
             userFileProcessService.Verify(
-                m => m.SaveFileAndReturnPath(It.IsAny<HttpPostedFileBase>(), It.IsAny<string>()),
+                m => m.SaveFileAndReturnPath(It.IsAny<HttpPostedFileBase>()),
                 Times.AtLeastOnce()
             );
 
@@ -78,7 +78,7 @@ namespace ExcelImport.Tests.UseCase
         private Mock<UserFileProcessService> CreatedAtAndSetupUserFileProcessServiceMock(string path, List<User> userList)
         {
             Mock<UserFileProcessService> userFileProcessService = new Mock<UserFileProcessService>();
-            userFileProcessService.Setup(m => m.SaveFileAndReturnPath(It.IsAny<HttpPostedFileBase>(), It.IsAny<string>())).Returns(path);
+            userFileProcessService.Setup(m => m.SaveFileAndReturnPath(It.IsAny<HttpPostedFileBase>())).Returns(path);
             userFileProcessService.Setup(m => m.ProcessFileContent(It.IsAny<string>())).Returns(userList);
             userFileProcessService.Setup(m => m.DeleteFile(It.IsAny<string>())).Verifiable();
             return userFileProcessService;

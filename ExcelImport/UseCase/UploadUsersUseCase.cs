@@ -10,9 +10,7 @@ namespace ExcelImport.UseCases
         private readonly IUserRepository repository;
         private readonly UserFactory userFactory;
         private readonly UserFileProcessService userFileProcessService;
-
-        private const string PATH = "~/Doc/";
-
+        
         public UploadUsersUseCase(
             IUserRepository repository,
             UserFactory userFactory,
@@ -25,7 +23,7 @@ namespace ExcelImport.UseCases
 
         public void Invoke(HttpPostedFileBase fileUpload)
         {
-            string pathToExcelFile = userFileProcessService.SaveFileAndReturnPath(fileUpload, PATH);
+            string pathToExcelFile = userFileProcessService.SaveFileAndReturnPath(fileUpload);
 
             dynamic userList = userFileProcessService.ProcessFileContent(pathToExcelFile);
 
