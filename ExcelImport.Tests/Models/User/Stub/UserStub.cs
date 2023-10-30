@@ -1,29 +1,27 @@
-﻿using ExcelImport.Models.User;
+﻿using UserEntity = ExcelImport.Models.User;
 
 namespace ExcelImport.Tests.Models.User.Stub
 {
     public class UserStub
     {
 
-        public static User ByDefault()
+        public static UserEntity.User ByDefault()
         {
-            return User.SignUp(
-                UserIdStub.ByDefault(),
+            return UserEntity.User.Create(
                 UserNameStub.ByDefault(),
                 UserAddressStub.ByDefault(),
                 UserContactNumberStub.ByDefault()
             );
         }
 
-        public static User FromValues(
+        public static UserEntity.User FromValues(
             string id = "",
             string name = "",
             string address = "",
             string contactNumber = ""
         )
         {
-            return User.Create(
-                string.IsNullOrEmpty(id) ? UserIdStub.ByDefault() : UserIdStub.FromValue(id),
+            return UserEntity.User.Create(
                 string.IsNullOrEmpty(name) ? UserNameStub.ByDefault() : UserNameStub.FromValue(name),
                 string.IsNullOrEmpty(address) ? UserAddressStub.ByDefault() : UserAddressStub.FromValue(address),
                 string.IsNullOrEmpty(contactNumber) ? UserContactNumberStub.ByDefault() : UserContactNumberStub.FromValue(address)
