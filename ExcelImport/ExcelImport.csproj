@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="UseCases\" />
-    <None Remove="Controllers\Exception\" />
     <None Remove="Models\Entity\" />
     <None Remove="Repository\" />
     <None Remove="Repository\Exception\" />
@@ -15,10 +13,12 @@
     <None Remove="Repository\User\" />
     <None Remove="Repository\Service\" />
     <None Remove="UseCase\Service\" />
+    <None Remove="Shared\Service\" />
+    <None Remove="Shared\Exception\" />
+    <None Remove="Shared\Service\FileProcessor\" />
+    <None Remove="Shared\Service\FileProcessor\Exception\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UseCases\" />
-    <Folder Include="Controllers\Exception\" />
     <Folder Include="Models\User\" />
     <Folder Include="Repository\" />
     <Folder Include="Repository\Exception\" />
@@ -27,5 +27,9 @@
     <Folder Include="Repository\User\" />
     <Folder Include="Repository\Service\" />
     <Folder Include="UseCase\Service\" />
+    <Folder Include="Shared\Service\" />
+    <Folder Include="Shared\Exception\" />
+    <Folder Include="Shared\Service\FileProcessor\" />
+    <Folder Include="Shared\Service\FileProcessor\Exception\" />
   </ItemGroup>
 </Project>

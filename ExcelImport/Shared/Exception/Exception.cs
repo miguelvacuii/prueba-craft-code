@@ -1,4 +1,4 @@
-﻿namespace ExcelImport.Shared.ValueObject.Exception
+﻿namespace ExcelImport.Shared.Exception
 {
 	public class Exception : System.Exception
 	{

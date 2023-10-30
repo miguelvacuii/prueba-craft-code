@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExcelImport.Models
+﻿namespace ExcelImport.Models
 {
     public class ErrorViewModel
     {

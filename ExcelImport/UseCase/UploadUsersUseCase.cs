@@ -1,8 +1,6 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using ExcelImport.Models.User;
+﻿using ExcelImport.Models.User;
 using ExcelImport.Repository.User;
+using ExcelImport.Shared.Service.FileProcessor;
 using ExcelImport.UseCase.Service;
 
 namespace ExcelImport.UseCases
@@ -11,17 +9,25 @@ namespace ExcelImport.UseCases
     {
         private readonly IUserRepository repository;
         private readonly UserFactory userFactory;
+        private readonly UserFileProcessService userFileProcessService;
 
-        private UploadUsersUseCase(IUserRepository repository)
-        {
+        private const string PATH = "~/Doc/";
+
+        private UploadUsersUseCase(
+            IUserRepository repository,
+            UserFactory userFactory,
+            UserFileProcessService userFileProcessService
+        ) {
             this.repository = repository;
+            this.userFactory = userFactory;
+            this.userFileProcessService = userFileProcessService;
         }
 
         public void Invoke(HttpPostedFileBase fileUpload)
         {
-            string pathToExcelFile = SaveFileAndReturnPath(fileUpload);
+            string pathToExcelFile = userFileProcessService.SaveFileAndReturnPath(fileUpload, PATH);
 
-            dynamic userList = GetUsersFromExcel(pathToExcelFile);
+            dynamic userList = userFileProcessService.ProcessFileContent(pathToExcelFile);
 
             foreach (var user in userList)
             {
@@ -29,31 +35,7 @@ namespace ExcelImport.UseCases
                 repository.Add(userUpdated);
             }
 
-            DeleteFile(pathToExcelFile);
+            userFileProcessService.DeleteFile(pathToExcelFile);
         }
-
-        private string SaveFileAndReturnPath(HttpPostedFileBase fileUpload) {
-            string fileName = fileUpload.FileName;
-            string targetPath = Server.MapPath("~/Doc/");
-            fileUpload.SaveAs(targetPath + fileName);
-            return targetPath + fileName;
-        }
-
-        private dynamic GetUsersFromExcel(string pathToExcelFile)
-        {
-            string sheetName = "Sheet1";
-            var excelFile = new ExcelQueryFactory(pathToExcelFile);
-
-            return (from rows in excelFile.Worksheet<User>(sheetName) select rows) as dynamic;
-        }
-
-        private void DeleteFile(String pathToExcelFile)
-        {
-            if ((System.IO.File.Exists(pathToExcelFile)))
-            {
-                System.IO.File.Delete(pathToExcelFile);
-            }
-        }
-
     }
 }

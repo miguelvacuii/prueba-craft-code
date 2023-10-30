@@ -1,39 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ExcelImport.UseCases;
-using ExcelImport.Controllers.Exception;
+using ExcelImport.Shared.Service.FileProcessor;
 
 namespace ExcelImport.Controllers
 {
     public class UserController : Controller
     {
+        private readonly UploadUsersUseCase uploadUsersUseCase;
+
+        public UserController(UploadUsersUseCase uploadUsersUseCase)
+        {
+            this.uploadUsersUseCase = uploadUsersUseCase;
+        }
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public FileResult DownloadExcel()
+        [HttpGet]
+        public FileResult DownloadUsers()
         {
-            string path = "/Doc/Users.xlsx";
-            return File(path, "application/vnd.ms-excel", "Users.xlsx");
+            const string PATH = "/Doc/Users.xlsx";
+            const string CONTENT_TYPE = "application/vnd.ms-excel";
+            const string FILE_NAME = "Users.xlsx";
+            return File(PATH, CONTENT_TYPE, FILE_NAME);
         }
 
         [HttpPost]
-        public IActionResult UploadExcel(HttpPostedFileBase fileUpload)
+        public IActionResult UploadUsers(HttpPostedFileBase fileUpload)
         {
-            const string CONTENT_TYPE_EXCEL = "application/vnd.ms-excel";
-            const string CONTENT_TYPE_XML = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-            if (fileUpload == null) {
-                throw InvalidFileException.FromNull();
-            }
-
-            if (fileUpload.ContentType != CONTENT_TYPE_EXCEL || fileUpload.ContentType != CONTENT_TYPE_XML) {
-                throw InvalidFileException.FromContentType();
-            }
-
             try {
-                UploadUsersUseCase.Invoke(fileUpload);
+                uploadUsersUseCase.Invoke(fileUpload);
                 return StatusCode(200);
             } catch (System.Exception exception) {
                 return StatusCode(422, exception.Message);
