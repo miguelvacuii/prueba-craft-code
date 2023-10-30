@@ -14,6 +14,7 @@
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/ExcelImport.Tests.runtimeconfig.dev.json
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/ExcelImport.Tests.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/ExcelImport.Tests.pdb
+/Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Castle.Core.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Microsoft.DotNet.InternalAbstractions.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll
@@ -24,6 +25,7 @@
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Microsoft.TestPlatform.Utilities.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.Common.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/testhost.dll
+/Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Moq.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/NuGet.Frameworks.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/bin/Debug/netcoreapp3.1/nunit.framework.dll
@@ -103,4 +105,3 @@
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/obj/Debug/netcoreapp3.1/ExcelImport.Tests.dll
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/obj/Debug/netcoreapp3.1/ExcelImport.Tests.pdb
 /Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/obj/Debug/netcoreapp3.1/ExcelImport.Tests.genruntimeconfig.cache
-/Users/mmartinez/Desktop/CRAFT_CODE/prueba-craft-code/ExcelImport.Tests/obj/Debug/netcoreapp3.1/ExcelImport.Tests.csproj.AssemblyReference.cache
