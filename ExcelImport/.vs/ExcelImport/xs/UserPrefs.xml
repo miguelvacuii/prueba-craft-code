@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{63E75B29-BD26-4683-9C85-56A62A09B013}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../ExcelImport.Tests/Models/User/UserAddressTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/Service/FileProcessor/FileProcessService.cs">
     <Files>
       <File FileName="Controllers/UserController.cs" Line="20" Column="1" />
-      <File FileName="UseCase/UploadUsersUseCase.cs" Line="14" Column="46" />
-      <File FileName="UseCase/Service/UserFileProcessService.cs" Line="40" Column="30" />
-      <File FileName="../ExcelImport.Tests/Models/User/UserAddressTest.cs" Line="9" Column="15" />
+      <File FileName="../ExcelImport.Tests/UseCase/Service/UserFileProcessServiceTest.cs" Line="68" Column="58" />
+      <File FileName="UseCase/UploadUsersUseCase.cs" Line="26" Column="93" />
+      <File FileName="../ExcelImport.Tests/UseCase/UploadUsersUseCaseTest.cs" Line="81" Column="101" />
+      <File FileName="UseCase/Service/UserFileProcessService.cs" Line="38" Column="42" NotebookId="1" />
+      <File FileName="Shared/Service/FileProcessor/FileProcessService.cs" Line="31" Column="14" NotebookId="1" />
+      <File FileName="Shared/Service/FileProcessor/IFileProcessorLibrary.cs" Line="4" Column="17" NotebookId="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,7 +18,14 @@
               <Node name="Models" expanded="True">
                 <Node name="User" expanded="True" />
               </Node>
+              <Node name="Repository" expanded="True" />
               <Node name="Shared" expanded="True">
+                <Node name="Service" expanded="True">
+                  <Node name="FileProcessor" expanded="True">
+                    <Node name="Exception" expanded="True" />
+                    <Node name="FileProcessService.cs" selected="True" />
+                  </Node>
+                </Node>
                 <Node name="ValueObject" expanded="True">
                   <Node name="Exception" expanded="True" />
                 </Node>
@@ -26,10 +36,13 @@
             </Node>
             <Node name="ExcelImport.Tests" expanded="True">
               <Node name="Models" expanded="True">
+                <Node name="Shared" expanded="True" />
                 <Node name="User" expanded="True">
                   <Node name="Stub" expanded="True" />
-                  <Node name="UserAddressTest.cs" selected="True" />
                 </Node>
+              </Node>
+              <Node name="UseCase" expanded="True">
+                <Node name="Service" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -37,10 +50,13 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="ExcelImport" expanded="True" selected="True">
+          <Node name="ExcelImport" expanded="True">
             <Node name="ExcelImport.Tests" expanded="True">
               <Node name="ExcelImport.Tests.Models.User" expanded="True">
                 <Node name="UserAddressTest" expanded="True" />
+                <Node name="UserIdTest" expanded="True">
+                  <Node name="ItShouldThrowExeptionWhenUserIdIsNotValid" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
